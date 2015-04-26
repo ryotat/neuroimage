@@ -1,0 +1,1 @@
+function dval = dlossmn(ww, gg, problem, opt)
