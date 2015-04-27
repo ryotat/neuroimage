@@ -2,12 +2,10 @@ cdir=pwd;
 addpath([cdir '/utils']);
 
 pow = -0.25;
-
+dir_save = 'results/mnfro/';
+label_fmt = sprintf('Subject=%%s_lambda=%%g_exp=%g',pow);
 
 subjects = {'A','B'}
-
-lambda=exp(linspace(log(1e+6),log(1),20));
-
 
 Tab = cell2mat({'A','B','C','D','E','F';...
        'G','H','I','J','K','L';...
@@ -21,17 +19,14 @@ clsopt = struct('W0',[],'nSamples', 37, 'nChannels', 64, 'ncls', 6, ...
                 'reg','fro','solver','sublbfgs', 'whitening', {{'st',pow,pow}}, 'display', 2);
  
 classy = {'mnds', [], clsopt};
-           
-
-model = struct('classifier', {classy},...
-              'decoder', {{'p300_decode', Tab}});
-
-dir_save = 'P300DATA/results/mnds_fro/';
-
-label_fmt = sprintf('Subject=%%s_lambda=%%g_exp=%g',pow);
+lambda =exp(linspace(log(1e+6),log(1),20));
+model  = struct('classifier', {classy},...
+                'decoder', {{'p300_decode', Tab}});
 
 [result,acccum]=p300_xval(subjects,...
                           lambda,...
                           model,...
                           dir_save,...
                           'label_fmt', label_fmt);
+
+plot_result_p300(dir_save, label_fmt, 'showspec',1,'lambda',lambda,'ylim',[40 100],'normx',1,'reg','fro');
