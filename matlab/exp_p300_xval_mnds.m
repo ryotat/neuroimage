@@ -3,6 +3,9 @@ addpath([cdir '/utils']);
 
 pow = -0.25;
 dir_save = 'results/mnds/';
+if ~exist(dir_save)
+  mkdir(dir_save)
+end
 label_fmt = sprintf('Subject=%%s_C=%%g_exp=%g',pow);
 
 subjects = {'A','B'}
