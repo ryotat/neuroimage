@@ -17,6 +17,7 @@ mex mnl1l2.c lbfgs.c -lut
 cd ..
 exp_p300_xval_mnl1l2space % Channel selection
 ```
+![Channelselectton](chansel.png)
 
 ### Trace norm regularization
 Try
