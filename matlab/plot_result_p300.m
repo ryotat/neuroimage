@@ -101,7 +101,7 @@ for ii=1:length(subjects)
 
   
   % Plot performance
-  subplotxl(nRows,2,ii,[0.12 0.12 0.05], [0.15 0.12 0.1]);
+  subplotxl(nRows,2,ii,[0.2 0.12 0.05], [0.25 0.12 0.15]);
   
   plot_accuracy_with_ms(xvalue, acccum, ...
                         1-loss, loss_std,...
@@ -117,7 +117,7 @@ for ii=1:length(subjects)
   
   % Plot counts/spectrum
   if opt.showspec>0
-    subplotxl(nRows, 2,ii+2,[0.12 0.12 0.05],[0.15 0.12 0.1]);
+    subplotxl(nRows, 2,ii+2,[0.2 0.12 0.05],[0.25 0.12 0.15]);
     N=countComp(D(:,:,ii)','tolrel',opt.thzero)';
     switch(opt.showspec)
      case 1
@@ -130,15 +130,15 @@ for ii=1:length(subjects)
         set(gca,'ytick',[0 10 20 30 40]);
       end
       
-      ylabel('# active components')
+      ylabelstr='# active components';
      case 2
       plot(log(xvalue), D(:,:,ii),'linewidth',2);
       ylim([0, max(median(D(:,:,ii)))*2]);
       switch(opt.reg)
        case {'ds','fro'}
-        ylabel('Singularvalues');
+        ylabelstr='Singularvalues';
        case'gl'
-        ylabel('Component norms');
+        ylabelstr='Component norms';
       end
     end      
     if ~isempty(opt.mark_lambda)
@@ -152,6 +152,7 @@ for ii=1:length(subjects)
             'xlim'    , xlim1);
     grid on;
     xlabel(xlabelstr);
+    ylabel(ylabelstr);
     format_ticks(gca,num2str_c(exp(xtick1)));
   end
   
