@@ -14,10 +14,21 @@ exp_p300_xval_mnfro; % Frobenius norm
 ```matlab
 cd mnl1l2
 mex mnl1l2.c lbfgs.c -lut
+copyfile(['mnl1l2.' mexext], '../')
 cd ..
 exp_p300_xval_mnl1l2space % Channel selection
 ```
-![Channelselectton](chansel.png)
+![Channel selectton](chansel.png)
+
+### Time-point Selection regularizer
+```matlab
+cd mnl1l2
+mex mnl1l2.c lbfgs.c -lut
+copyfile(['mnl1l2.' mexext], '../')
+cd ..
+exp_p300_xval_mnl1l2time % Time-point selection
+```
+![Time-point selection](timesel.png)
 
 ### Trace norm regularization
 Try
