@@ -1,11 +1,11 @@
 cdir=pwd;
 addpath([cdir '/utils']);
 
-dir_save = 'results/mnl1l2space/';
+dir_save = 'results/mnl1l2time/';
 if ~exist(dir_save)
   mkdir(dir_save)
 end
-label_fmt = 'Subject=%s_lambda=%g_space_scalest.mat';
+label_fmt = 'Subject=%s_lambda=%g_time_scalest.mat';
 
 subjects = {'A','B'}
 
@@ -18,7 +18,7 @@ Tab = cell2mat({'A','B','C','D','E','F';...
 
 
 clsopt = struct('W0',[],'nSamples', 37, 'nChannels', 64, 'ncls', 6, ...
-                'solver','mnl1l2', 'whitening', 'scalest', 'display', 2);
+                'solver','mnl1l2', 'whitening', 'scalest', 'group','time','display', 2);
  
 classy = {'mnl1l2', [], clsopt};
 lambda = exp(linspace(log(100),log(0.01),20));
@@ -32,7 +32,7 @@ model  = struct('classifier', {classy},...
                           'label_fmt', label_fmt);
 
 
-lmdmark=[8.86 8.86];
+lmdmark = [8.86 14.4];
 [D,memo]=plot_result_p300(dir_save, label_fmt,...
-                 'showspec',1,'normx',1,'reg','gl','group','space','ylim',[40 100],'mark_lambda',lmdmark);
+                 'showspec',1,'normx',1,'reg','gl','group','time','ylim',[40 100],'mark_lambda',lmdmark);
 
